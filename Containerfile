@@ -6,11 +6,13 @@ COPY /etc/dnf /etc/dnf
 # Install packages in an early layer because this is mostly stable.
 RUN dnf install \
       nfs-utils \
+      cockpit \
     && dnf clean all \
     && rm -rf /var/cache/yum
 
 # Automatically update quadlet managed container images.
-RUN systemctl enable podman-auto-update.timer
+RUN systemctl enable podman-auto-update.timer \
+ && systemctl enable cockpit.socket
 
 # Disable SSH daemon
 #RUN systemctl disable sshd.service \
