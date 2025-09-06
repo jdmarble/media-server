@@ -13,12 +13,12 @@ RUN dnf install \
     && rm -rf /var/cache/yum
 
 # Automatically update quadlet managed container images.
+# Disable SSH daemon to reduce attack surface.
+# Enable Cockpit for remote management and to increase attack surface.
 RUN systemctl enable podman-auto-update.timer \
+ && systemctl disable sshd.service \
+ && systemctl mask sshd.service \
  && systemctl enable cockpit.socket
-
-# Disable SSH daemon
-#RUN systemctl disable sshd.service \
-# && systemctl mask sshd.service
 
 # Copy system configuration later because this is where most changes will be made.
 COPY /etc/ /etc/
