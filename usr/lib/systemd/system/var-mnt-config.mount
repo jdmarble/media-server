@@ -1,0 +1,13 @@
+[Unit]
+Description=Configmount
+After=network.target
+Wants=network-online.target
+
+[Mount]
+What=unas-pro.jdmarble.net:/var/nfs/shared/jellyfin_config
+Where=/var/mnt/config
+Type=nfs
+Options=auto
+
+[Install]
+WantedBy=multi-user.target

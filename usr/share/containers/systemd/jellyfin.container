@@ -1,0 +1,38 @@
+[Unit]
+Description=Jellyfin
+Requires=network-online.target
+After=network-online.target
+Requires=var-mnt-media.mount
+After=var-mnt-media.mount
+Requires=var-mnt-config.mount
+After=var-mnt-config.mount
+
+[Container]
+# Image
+AutoUpdate=registry
+Image=jellyfin.image
+
+# Network
+HostName=%N.%H
+PublishPort=8096:8096
+
+# Security
+User=1000
+Group=1000
+ReadOnly=yes
+NoNewPrivileges=yes
+DropCapability=all
+
+# Storage
+Volume=/var/mnt/config:/config:z
+Volume=/var/mnt/media:/media:ro,z
+Volume=/var/tmp/jellyfin-cache:/cache:z
+
+[Service]
+# Restart on crash
+Restart=always
+# Restart 10 seconds after the first failure.
+RestartSec=10
+
+[Install]
+WantedBy=default.target
