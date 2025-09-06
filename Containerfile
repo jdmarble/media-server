@@ -4,6 +4,8 @@ FROM quay.io/fedora/fedora-bootc:42
 COPY /etc/dnf /etc/dnf
 
 # Install packages in an early layer because this is mostly stable.
+# nfs-utils: To mount the media share over NFS
+# cockpit: Remote management web UI
 RUN dnf install \
       nfs-utils \
       cockpit \
