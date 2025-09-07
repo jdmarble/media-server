@@ -5,7 +5,7 @@ Wants=network-online.target
 
 [Mount]
 What=unas-pro.jdmarble.net:/var/nfs/shared/jellyfin_config
-Where=/var/mnt/config
+Where=/var/lib/jellyfin
 Type=nfs
 Options=auto
 

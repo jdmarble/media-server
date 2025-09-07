@@ -56,3 +56,11 @@ just anaconda-iso
 Burn the resulting `output/bootiso/install.iso` to bootable media and install as you would any other OS.
 During installation, Anaconda _may_ prompt you for the installation destination disk.
 If there is only a single disk available, **it will overwrite the entire disk without asking**.
+
+### Credentials
+
+After installation, run the following command as root on the device so the Cloudflare plugin for Caddy can configure DNS records for a Let's Encrypt certificate challenge.
+
+```sh
+echo CF_API_TOKEN=your_cloudflare_API_token_here | systemd-creds encrypt --name=caddy_credentials - /etc/credstore.encrypted/caddy_credentials
+```

@@ -1,0 +1,6 @@
+jellyfin.jdmarble.net {
+    reverse_proxy localhost:8096
+    tls jdmarble@jdmarble.com {
+	    dns cloudflare {env.CF_API_TOKEN}
+    }
+}
