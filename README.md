@@ -1,20 +1,12 @@
 # Media Server
 
 This repository contains configuration and code to create a disk image for a simple media streaming server.
-The operating system is an immutable variant of Fedora constructed by [`bootc`](https://docs.fedoraproject.org/en-US/bootc).
-The server runs [Jellyfin](https://jellyfin.org/) for video media.
-It does not host the media files, but mounts them from an NFS server.
-The image can be installed on bare-metal with an installation disc image constructed by [bootc-image-builder](https://docs.fedoraproject.org/en-US/bootc/provisioning-generic/#_using_anaconda_for_generic_installations).
-See the `bootc` documentation for other deployment methods, such as VM images.
-Regardless of the installation method,
-updates are applied automatically by pulling container images from this repository's container registry.
+It builds off of a [base image](https://github.com/jdmarble/bootc-base).
 
 ## Installation
 
 These are steps for initial installation of the server.
 Software and configuration updates are built and distributed from CI.
-Since the initial installer images are large and require root priviledges to build,
-I've chosen not to build them in CI.
 
 ### Prerequisites
 
