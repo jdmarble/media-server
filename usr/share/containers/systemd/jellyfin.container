@@ -14,7 +14,10 @@ Image=jellyfin.image
 
 # Network
 HostName=%N.%H
-PublishPort=8096:8096
+# Needs host networking to be able to respond to broadcast messages for discovery.
+Network=host
+# Sets the response to broadcast for discovery.
+Environment=JELLYFIN_PublishedServerUrl=https://jellyfin.jdmarble.net
 
 # Security
 User=977
