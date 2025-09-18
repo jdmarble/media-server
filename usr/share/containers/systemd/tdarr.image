@@ -1,0 +1,11 @@
+[Unit]
+Description=Tdarr Image
+After=network-online.target
+
+[Image]
+Image=ghcr.io/haveagitgat/tdarr:latest
+
+[Service]
+# Retry if pull fails
+Restart=on-failure
+RestartSec=30

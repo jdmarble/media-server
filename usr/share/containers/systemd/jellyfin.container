@@ -26,10 +26,12 @@ ReadOnly=yes
 NoNewPrivileges=yes
 DropCapability=all
 
+AddDevice=/dev/dri
+
 # Storage
-Volume=/var/lib/jellyfin:/config:z
+Volume=/var/lib/jellyfin:/config:Z
 Volume=/var/mnt/media:/media:ro,z
-Volume=/var/tmp/jellyfin-cache:/cache:z
+Volume=/var/tmp/jellyfin-cache:/cache:Z
 
 [Service]
 # Restart on crash

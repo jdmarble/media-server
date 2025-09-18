@@ -1,0 +1,45 @@
+[Unit]
+Description=Tdarr
+Requires=network-online.target
+After=network-online.target
+Requires=var-mnt-media.mount
+After=var-mnt-media.mount
+Requires=var-lib-tdarr.mount
+After=var-lib-tdarr.mount
+
+[Container]
+# Image
+AutoUpdate=registry
+Image=tdarr.image
+
+# Network
+HostName=%N.%H
+PublishPort=8265:8265
+PublishPort=8266:8266
+
+# Security
+#User=978
+Environment=PUID=978
+#Group=978
+Environment=PGID=978
+ReadOnly=yes
+NoNewPrivileges=yes
+#DropCapability=all
+
+AddDevice=/dev/dri
+
+# Storage
+Volume=/var/lib/tdarr/server:/app/server:Z
+Volume=/var/lib/tdarr/configs:/app/configs:Z
+Volume=/var/lib/tdarr/logs:/app/logs:Z
+Volume=/var/mnt/media:/media:z
+Volume=/var/tmp/tdarr-cache:/cache:Z
+
+[Service]
+# Restart on crash
+Restart=always
+# Restart 10 seconds after the first failure.
+RestartSec=10
+
+[Install]
+WantedBy=default.target
