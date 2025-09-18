@@ -25,6 +25,8 @@ Group=977
 ReadOnly=yes
 NoNewPrivileges=yes
 DropCapability=all
+AddDevice=/dev/dri
+GroupAdd=video
 
 # Storage
 Volume=/var/lib/jellyfin:/config:z
