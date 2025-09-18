@@ -1,28 +1,28 @@
 [Unit]
-Description=Jellyseerr
+Description=Radarr
 Requires=network-online.target
 After=network-online.target
-Requires=var-lib-jellyseerr.mount
-After=var-lib-jellyseerr.mount
 
 [Container]
 # Image
 AutoUpdate=registry
-Image=jellyseerr.image
+Image=radarr.image
 
 # Network
 HostName=%N.%H
-PublishPort=5055:5055
+PublishPort=7878:7878
 
 # Security
-User=975
-Group=975
+User=974
+Group=974
 ReadOnly=yes
 NoNewPrivileges=yes
 DropCapability=all
 
 # Storage
-Volume=/var/lib/jellyseerr:/app/config:Z
+Volume=/var/lib/radarr:/radarr/etc:Z
+Volume=/var/mnt/media:/download:z
+Tmpfs=/tmp:rw,mode=1777
 
 [Service]
 # Restart on crash

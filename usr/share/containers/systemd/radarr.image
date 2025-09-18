@@ -1,9 +1,9 @@
 [Unit]
-Description=Jellyseerr Image
+Description=Radarr Image
 After=network-online.target
 
 [Image]
-Image=docker.io/fallenbagel/jellyseerr:latest
+Image=ghcr.io/11notes/radarr:rolling
 
 [Service]
 # Retry if pull fails
