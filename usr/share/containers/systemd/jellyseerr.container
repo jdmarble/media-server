@@ -1,0 +1,34 @@
+[Unit]
+Description=Jellyseerr
+Requires=network-online.target
+After=network-online.target
+Requires=var-lib-jellyseerr.mount
+After=var-lib-jellyseerr.mount
+
+[Container]
+# Image
+AutoUpdate=registry
+Image=jellyseerr.image
+
+# Network
+HostName=%N.%H
+PublishPort=5055:5055
+
+# Security
+User=976
+Group=976
+ReadOnly=yes
+NoNewPrivileges=yes
+DropCapability=all
+
+# Storage
+Volume=/var/lib/jellyseerr:/app/config:Z
+
+[Service]
+# Restart on crash
+Restart=always
+# Restart 10 seconds after the first failure.
+RestartSec=10
+
+[Install]
+WantedBy=default.target
