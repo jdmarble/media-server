@@ -1,0 +1,7 @@
+prowlarr.jdmarble.net {
+    reverse_proxy localhost:9696
+    tls jdmarble@jdmarble.com {
+	    dns cloudflare {env.CF_API_TOKEN}
+        resolvers 1.1.1.1
+    }
+}

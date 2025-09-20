@@ -1,0 +1,33 @@
+[Unit]
+Description=Prowlarr
+Requires=network-online.target
+After=network-online.target
+
+[Container]
+# Image
+AutoUpdate=registry
+Image=prowlarr.image
+
+# Network
+HostName=%N.%H
+PublishPort=9696:9696
+
+# Security
+User=972
+Group=972
+ReadOnly=yes
+NoNewPrivileges=yes
+DropCapability=all
+
+# Storage
+Volume=/var/lib/prowlarr:/prowlarr/etc:Z
+Tmpfs=/tmp:rw,mode=1777
+
+[Service]
+# Restart on crash
+Restart=always
+# Restart 10 seconds after the first failure.
+RestartSec=10
+
+[Install]
+WantedBy=default.target

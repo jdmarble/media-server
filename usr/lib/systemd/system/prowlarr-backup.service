@@ -1,0 +1,14 @@
+[Unit]
+Description=Prowlarr backup
+
+[Service]
+ReadOnlyPaths=/var/lib/prowlarr
+ProtectSystem=strict
+User=prowlarr
+Group=prowlarr
+LoadCredentialEncrypted=prowlarr_config
+ExecStart=/usr/sbin/rclone sync \
+  --config=%d/prowlarr_config \
+  --check-first \
+  --verbose \
+  /var/lib/prowlarr prowlarr_config:/prowlarr_config
