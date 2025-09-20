@@ -10,5 +10,7 @@ RUN dnf install \
 # Copy system configuration later because this is where most changes will be made.
 COPY /usr/ /usr/
 
+RUN systemctl enable radarr-backup.timer
+
 # https://docs.fedoraproject.org/en-US/bootc/building-containers/#_linting
 RUN bootc container lint --fatal-warnings

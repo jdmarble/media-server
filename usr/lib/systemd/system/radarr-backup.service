@@ -1,0 +1,14 @@
+[Unit]
+Description=Radarr backup
+
+[Service]
+ReadOnlyPaths=/var/lib/radarr
+ProtectSystem=strict
+User=radarr
+Group=radarr
+LoadCredentialEncrypted=radarr_config
+ExecStart=/usr/sbin/rclone sync \
+  --config=%d/radarr_config \
+  --check-first \
+  --verbose \
+  /var/lib/radarr radarr_config:/radarr_config
