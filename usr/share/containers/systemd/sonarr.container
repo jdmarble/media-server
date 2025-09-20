@@ -1,0 +1,34 @@
+[Unit]
+Description=Sonarr
+Requires=network-online.target
+After=network-online.target
+
+[Container]
+# Image
+AutoUpdate=registry
+Image=sonarr.image
+
+# Network
+HostName=%N.%H
+PublishPort=8989:8989
+
+# Security
+User=973
+Group=973
+ReadOnly=yes
+NoNewPrivileges=yes
+DropCapability=all
+
+# Storage
+Volume=/var/lib/sonarr:/sonarr/etc:Z
+Volume=/var/mnt/media:/download:z
+Tmpfs=/tmp:rw,mode=1777
+
+[Service]
+# Restart on crash
+Restart=always
+# Restart 10 seconds after the first failure.
+RestartSec=10
+
+[Install]
+WantedBy=default.target

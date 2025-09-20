@@ -1,0 +1,14 @@
+[Unit]
+Description=Sonarr backup
+
+[Service]
+ReadOnlyPaths=/var/lib/sonarr
+ProtectSystem=strict
+User=sonarr
+Group=sonarr
+LoadCredentialEncrypted=sonarr_config
+ExecStart=/usr/sbin/rclone sync \
+  --config=%d/sonarr_config \
+  --check-first \
+  --verbose \
+  /var/lib/sonarr sonarr_config:/sonarr_config

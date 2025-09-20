@@ -1,0 +1,11 @@
+[Unit]
+Description=Sonarr Image
+After=network-online.target
+
+[Image]
+Image=ghcr.io/11notes/sonarr:rolling
+
+[Service]
+# Retry if pull fails
+Restart=on-failure
+RestartSec=30
