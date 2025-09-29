@@ -3,7 +3,7 @@ name: build container bootc
 on:
   push:
     branches:
-      - "main"
+      - "*"
 
 jobs:
   build:
@@ -12,17 +12,21 @@ jobs:
     permissions:
       contents: read
       packages: write
+    env:
+      # Use tag `latest` for the `main` branch.
+      # Otherwise, the tag will match the branch name.
+      TAG: ${{ github.ref == 'refs/heads/main' && 'latest' || github.ref_name }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
 
       - name: Run podman build
         run: |
-          podman build --tag=ghcr.io/${{ github.repository }}:latest .
+          podman build --tag=ghcr.io/${{ github.repository }}:${TAG} .
 
       - name: Push image to ghcr.io
         run: |
           podman login ghcr.io \
             --username ${{ github.actor }} \
             --password ${{ secrets.GITHUB_TOKEN }}
-          podman push ghcr.io/${{ github.repository }}:latest
+          podman push ghcr.io/${{ github.repository }}:${TAG}
