@@ -1,0 +1,14 @@
+[Unit]
+Description=Jellyfin backup
+
+[Service]
+ReadOnlyPaths=/var/lib/jellyfin
+ProtectSystem=strict
+User=jellyfin
+Group=jellyfin
+LoadCredentialEncrypted=jellyfin_config
+ExecStart=/usr/sbin/rclone sync \
+  --config=%d/jellyfin_config \
+  --check-first \
+  --verbose \
+  /var/lib/jellyfin jellyfin_config:/jellyfin_config

@@ -4,8 +4,6 @@ Requires=network-online.target
 After=network-online.target
 Requires=var-mnt-media.mount
 After=var-mnt-media.mount
-Requires=var-lib-jellyfin.mount
-After=var-lib-jellyfin.mount
 
 [Container]
 # Image
