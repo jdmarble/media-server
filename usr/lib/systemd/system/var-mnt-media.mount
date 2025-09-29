@@ -4,10 +4,12 @@ After=network.target
 Wants=network-online.target
 
 [Mount]
-What=unas-pro.jdmarble.net:/var/nfs/shared/media
+# Default to bind mounting to `/var/lib/media` on the system disk.
+# You probably want to override this to point to a large disk or NAS.
+What=/var/lib/media
 Where=/var/mnt/media
-Type=nfs
-Options=auto
+Type=none
+Options=bind
 
 [Install]
 WantedBy=multi-user.target
