@@ -2,8 +2,6 @@
 Description=Jellyseerr
 Requires=network-online.target
 After=network-online.target
-Requires=var-lib-jellyseerr.mount
-After=var-lib-jellyseerr.mount
 
 [Container]
 # Image

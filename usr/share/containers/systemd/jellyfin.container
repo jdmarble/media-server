@@ -4,8 +4,6 @@ Requires=network-online.target
 After=network-online.target
 Requires=var-mnt-media.mount
 After=var-mnt-media.mount
-Requires=var-lib-jellyfin.mount
-After=var-lib-jellyfin.mount
 
 [Container]
 # Image
@@ -16,8 +14,6 @@ Image=jellyfin.image
 HostName=%N.%H
 # Needs host networking to be able to respond to broadcast messages for discovery.
 Network=host
-# Sets the response to broadcast for discovery.
-Environment=JELLYFIN_PublishedServerUrl=https://jellyfin.jdmarble.net
 
 # Security
 User=977

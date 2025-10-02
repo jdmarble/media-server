@@ -1,0 +1,14 @@
+[Unit]
+Description=Jellyseerr backup
+
+[Service]
+ReadOnlyPaths=/var/lib/jellyseerr
+ProtectSystem=strict
+User=jellyseerr
+Group=jellyseerr
+LoadCredentialEncrypted=jellyseerr_config
+ExecStart=/usr/sbin/rclone sync \
+  --config=%d/jellyseerr_config \
+  --check-first \
+  --verbose \
+  /var/lib/jellyseerr jellyseerr_config:/jellyseerr_config

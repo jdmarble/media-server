@@ -8,10 +8,12 @@ RUN dnf install \
 COPY /usr/ /usr/
 
 RUN systemctl enable \
- caddy.service \
- radarr-backup.timer \
- sonarr-backup.timer \
- prowlarr-backup.timer
+    caddy.service \
+    jellyfin-backup.timer \
+    jellyseerr-backup.timer \
+    radarr-backup.timer \
+    sonarr-backup.timer \
+    prowlarr-backup.timer
 
 # https://docs.fedoraproject.org/en-US/bootc/building-containers/#_linting
 RUN bootc container lint --fatal-warnings
