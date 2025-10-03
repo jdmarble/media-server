@@ -5,6 +5,7 @@ RUN dnf install \
     && dnf clean all && rm -rf /var/log/* /var/cache /var/lib/{dnf,rpm-state,rhsm}
 
 # Copy system configuration later because this is where most changes will be made.
+COPY /etc/ /etc/
 COPY /usr/ /usr/
 
 RUN systemctl enable \
