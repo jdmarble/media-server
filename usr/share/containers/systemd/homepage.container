@@ -2,8 +2,6 @@
 Description=Homepage
 Requires=network-online.target
 After=network-online.target
-Requires=var-lib-homepage.mount
-After=var-lib-homepage.mount
 
 [Container]
 # Image
@@ -22,7 +20,7 @@ DropCapability=all
 
 # Configuration
 # Prevents some kinds of attacks on API server.
-Environment=HOMEPAGE_ALLOWED_HOSTS=homepage.jdmarble.net
+Environment=HOMEPAGE_ALLOWED_HOSTS=media-server.local
 # Do not log to the (RO) config directory.
 Environment=LOG_TARGETS=stdout
 Volume=/etc/homepage:/app/config:ro,z
