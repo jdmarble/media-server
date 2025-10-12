@@ -1,7 +1,5 @@
 [Unit]
 Description=Media mount
-After=network.target
-Wants=network-online.target
 
 [Mount]
 # Default to bind mounting to `/var/lib/media` on the system disk.
