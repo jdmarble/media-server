@@ -13,8 +13,8 @@ HostName=%N.%H
 PublishPort=3000:3000
 
 # Security
-User=979
-Group=979
+User=970
+Group=970
 NoNewPrivileges=yes
 DropCapability=all
 
