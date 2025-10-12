@@ -20,7 +20,7 @@ DropCapability=all
 
 # Configuration
 # Prevents some kinds of attacks on API server.
-Environment=HOMEPAGE_ALLOWED_HOSTS=media-server.local
+Environment=HOMEPAGE_ALLOWED_HOSTS=media-server.local,media-server.local:3000,localhost:3000,127.0.0.1:3000
 # Do not log to the (RO) config directory.
 Environment=LOG_TARGETS=stdout
 Volume=/etc/homepage:/app/config:ro,z
