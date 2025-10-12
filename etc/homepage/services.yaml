@@ -2,19 +2,13 @@
 - Services:
     - Jellyfin:
         href: http://media-server.local:8096
-        siteMonitor: http://media-server.local:8096
     - Jellyseerr:
         href: http://media-server.local:5055
-        siteMonitor: http://media-server.local:5055
     - Prowlarr:
         href: http://media-server.local:9696
-        siteMonitor: http://media-server.local:9696
     - Radarr:
         href: http://media-server.local:7878
-        siteMonitor: http://media-server.local:7878
     - Sonarr:
         href: http://media-server.local:8989
-        siteMonitor: http://media-server.local:8989
     - Cockpit:
-        href: https://media-server.local:9000
-        siteMonitor: https://media-server.local:9000
+        href: https://media-server.local:9090
