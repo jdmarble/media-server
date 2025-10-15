@@ -18,8 +18,9 @@ Network=host
 Environment=JELLYFIN_PublishedServerUrl=http://%H.local:8096
 
 # Security
-User=977
-Group=977
+User=501
+Group=501
+GroupAdd=978
 ReadOnly=yes
 NoNewPrivileges=yes
 DropCapability=all

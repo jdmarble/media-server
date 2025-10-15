@@ -13,8 +13,9 @@ HostName=%N.%H
 PublishPort=8989:8989
 
 # Security
-User=973
-Group=973
+User=505
+Group=505
+GroupAdd=978
 ReadOnly=yes
 NoNewPrivileges=yes
 DropCapability=all
