@@ -1,0 +1,72 @@
+---
+- name: Setup TLS reverse proxy
+  hosts: media-server
+
+  vars_prompt:
+    - name: base_domain_name
+      prompt: 'Enter the base domain name (for example: "example.com")?'
+      private: false
+    - name: cf_api_key
+      prompt: 'Enter your Cloudflare API token'
+      private: true
+    - name: email
+      prompt: 'Enter the email address to use for ACME protocol'
+      private: false
+
+  tasks:
+    - name: Ensure `/etc/caddy/Caddyfile.d` directory
+      ansible.builtin.file:
+        path: /etc/caddy/Caddyfile.d
+        state: directory
+        owner: root
+        group: root
+        mode: u=wrx,go=rx
+    - name: Add environment file
+      ansible.builtin.template:
+        src: environment.j2
+        dest: /etc/caddy/environment
+        owner: root
+        group: root
+        mode: u=rw,go=r
+    - name: Add Cloudflare DNS Acme challenge configuration
+      ansible.builtin.template:
+        src: cf_dns_acme.caddyfile.j2
+        dest: /etc/caddy/Caddyfile.d/cf_dns_acme.caddyfile
+        owner: caddy
+        group: caddy
+        # This will have a secret API key in it
+        mode: u=r,go=
+    - name: Configure Cloudflare DNS for host
+      community.general.cloudflare_dns:
+        api_token: "{{ cf_api_key }}"
+        zone: "{{ base_domain_name }}"
+        record: "{{ ansible_hostname }}"
+        type: A
+        value: "{{ ansible_default_ipv4.address }}"
+    - name: Configure Cloudflare DNS for service
+      community.general.cloudflare_dns:
+        api_token: "{{ cf_api_key }}"
+        zone: "{{ base_domain_name }}"
+        record: "{{ item }}"
+        type: CNAME
+        value: "{{ ansible_hostname }}.{{ base_domain_name }}"
+      loop:
+        - jellyfin
+        - jellyseerr
+        - prowlarr
+        - radarr
+        - sonarr
+    - name: Ensure `/etc/containers/systemd/jellyfin.container.d` directory
+      ansible.builtin.file:
+        path: /etc/containers/systemd/jellyfin.container.d
+        state: directory
+        owner: root
+        group: root
+        mode: u=wrx,go=rx
+    - name: Add drop-in configuration for published server URL
+      ansible.builtin.template:
+        src: jellyfin_publishedserverurl.conf.j2
+        dest: /etc/containers/systemd/jellyfin.container.d/jellyfin_publishedserverurl.conf
+        owner: root
+        group: root
+        mode: u=rw,go=r

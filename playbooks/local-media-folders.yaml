@@ -1,0 +1,24 @@
+---
+- name: Create local media folders
+  hosts: media-server
+
+  tasks:
+    - name: Allow services to write to media folder
+      ansible.builtin.file:
+        path: '/var/mnt/media'
+        state: directory
+        owner: root
+        group: root
+        mode: ugo=wrx
+    - name: Create media directory
+      ansible.builtin.file:
+        path: '/var/mnt/media/{{ item }}'
+        state: directory
+        owner: root
+        group: root
+        mode: ugo=wrx
+      loop:
+        - movies
+        - shows
+        - radarr
+        - sonarr
