@@ -1,0 +1,3 @@
+{$SCHEME}://{$HOSTNAME}.{$BASE_DOMAIN_NAME} {
+    reverse_proxy localhost:3000
+}

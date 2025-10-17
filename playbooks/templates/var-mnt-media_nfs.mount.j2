@@ -1,0 +1,8 @@
+[Unit]
+After=network.target
+Wants=network-online.target
+
+[Mount]
+What={{ hostvars['file-server']['ansible_host'] }}:{{ hostvars['file-server']['media_path'] }}
+Type=nfs
+Options=auto

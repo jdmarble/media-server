@@ -1,0 +1,35 @@
+[Unit]
+Description=Homepage
+Requires=network-online.target
+After=network-online.target
+
+[Container]
+# Image
+AutoUpdate=registry
+Image=homepage.image
+
+# Network
+HostName=%N.%H
+PublishPort=3000:3000
+
+# Security
+User=500
+Group=500
+NoNewPrivileges=yes
+DropCapability=all
+
+# Configuration
+# Prevents some kinds of attacks on API server.
+Environment=HOMEPAGE_ALLOWED_HOSTS=media-server.local,media-server.local:3000,localhost:3000,127.0.0.1:3000
+# Do not log to the (RO) config directory.
+Environment=LOG_TARGETS=stdout
+Volume=/etc/homepage:/app/config:ro,z
+
+[Service]
+# Restart on crash
+Restart=always
+# Restart 10 seconds after the first failure.
+RestartSec=10
+
+[Install]
+WantedBy=default.target

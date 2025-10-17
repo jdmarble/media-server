@@ -5,15 +5,11 @@ RUN dnf install \
     && dnf clean all && rm -rf /var/log/* /var/cache /var/lib/{dnf,rpm-state,rhsm}
 
 # Copy system configuration later because this is where most changes will be made.
+COPY /etc/ /etc/
 COPY /usr/ /usr/
 
 RUN systemctl enable \
-    caddy.service \
-    jellyfin-backup.timer \
-    jellyseerr-backup.timer \
-    radarr-backup.timer \
-    sonarr-backup.timer \
-    prowlarr-backup.timer
+    caddy.service
 
 # https://docs.fedoraproject.org/en-US/bootc/building-containers/#_linting
 RUN bootc container lint --fatal-warnings

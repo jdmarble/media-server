@@ -13,8 +13,8 @@ HostName=%N.%H
 PublishPort=5055:5055
 
 # Security
-User=975
-Group=975
+User=502
+Group=502
 ReadOnly=yes
 NoNewPrivileges=yes
 DropCapability=all
