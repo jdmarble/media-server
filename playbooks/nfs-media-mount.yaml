@@ -2,10 +2,23 @@
 - name: Configure media as NFS mount
   hosts: media-server
   tasks:
+    - name: Ensure var-mnt-media.d drop-in path
+      ansible.builtin.file:
+        path: '/etc/systemd/system/var-mnt-media.mount.d/'
+        state: directory
+        owner: root
+        group: root
+        mode: u=rwx,go=rx
     - name: Override default var-mnt-media.mount
       ansible.builtin.template:
-        src: nfs_var-mnt-media.mount.j2
-        dest: /etc/systemd/system/var-mnt-media.mount
+        src: var-mnt-media_nfs.mount.j2
+        dest: '/etc/systemd/system/var-mnt-media.mount.d/nfs.conf'
         owner: root
         group: root
         mode: u=rw,go=r
+    - name: Ensure the mount is enabled
+      ansible.builtin.systemd_service:
+        name: var-mnt-media.mount
+        daemon_reload: true
+        enabled: true
+        state: restarted

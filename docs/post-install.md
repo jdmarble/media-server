@@ -8,9 +8,19 @@ ansible-playbook --inventory=inventory_dev.ini --become --ask-become-pass playbo
 
 ## Configure Media Mounts
 
+If you do not store your media on your `media-manager` instance,
+you can configure how it connects to your media storage by
+overriding the `var-mnt-media.mount` unit with a systemd drop-in.
+
+Edit the inventory variables for the `file-server` host before using any of the referenced playbooks.
+
 ### NFS Mounted Media Share
 
-### Local Media Only
+Configure your file server to allow the media server to connect to the media mount with read and write access.
+
+```sh
+ansible-playbook --inventory=inventory_prod.yaml --become --ask-become-pass playbooks/nfs-media-mount.yaml
+```
 
 ## Configure Jellyfin
 
