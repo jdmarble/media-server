@@ -1,9 +1,0 @@
-[Unit]
-Description=Sonarr backup timer
-
-[Timer]
-OnCalendar=daily
-AccuracySec=1day
-
-[Install]
-WantedBy=timers.target

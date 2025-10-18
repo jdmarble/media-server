@@ -1,5 +1,5 @@
 [Unit]
-Description=Prowlarr backup timer
+Description=%I backup timer
 
 [Timer]
 OnCalendar=daily
